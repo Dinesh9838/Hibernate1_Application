@@ -6,14 +6,16 @@
 	<hibernate-configuration>
 	      <session-factory>
 	      <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-	      <property name="connection.url">jdbc:mysql://localhost:3306/Silverdata</property>
+	      <property name="connection.url">jdbc:mysql://localhost:3306/aarvo</property>
 	      <property name="hibernate.connection.driverclass">com.mysql.cj.jdbc.Driver</property>
 	      <property name="connection.username">root</property>
-	      <property name="connection.password">Dinesh@123</property>
+	      <property name="connection.password">root</property>
 	      <property name="show_sql">true</property>
 	       <property name="format_sql">true</property>
 	      <property name="hbm2ddl.auto">create</property>
 	      
-	      <mapping resource="Employee.hbm.xml"/>
+	      
+	      <mapping class="hibernate.entity.Employee"/>
+		<mapping class="hibernate.entity.Address"/>
 	      </session-factory>
 	</hibernate-configuration>

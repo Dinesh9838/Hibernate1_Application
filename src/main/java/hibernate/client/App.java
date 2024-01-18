@@ -1,84 +1,79 @@
 package hibernate.client;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 import java.util.List;
 
+import hibernate.entity.Address;
 import hibernate.entity.Employee;
 
 public class App {
 
 	public static void main(String[] args) {
-//		Employee e = new Employee();
-//		Employee v = new Employee();
-//		e.setId(1);
-//		e.setName("kishan Kumar");
-//		e.setGender("male");
-//		e.setSalary(22000);
-//		
-//		v.setId(2);
-//		v.setName("shyam");
-//		v.setGender("male");
-//		v.setSalary(2500000);
-		
-//		Configuration cfg = new Configuration().configure();
-//		SessionFactory sf = cfg.buildSessionFactory();
-		
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
-		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-		SessionFactory sf = meta.buildSessionFactory();		
-		
-		Session session = sf.openSession();
-		Transaction tx = session.beginTransaction();
-		System.out.println("--Start----");
-		
-//		Example of HQL to get all the records
-//		Query query1 =session.createQuery("from Employee");
-//		List list=query1.list();
-//		System.out.println(list);
-//		Query q=session.createQuery("select max(name) from Employee");  
-//		List<Integer> list1=q.list();  
-//		System.out.println(list1.get(0));  
-//		
-////		HQL to get records with pagination
-//		Query query2=session.createQuery("from Employee");  
-//		query2.setFirstResult(5);  
-//		query2.setMaxResults(5);  
-//		List list2=query2.list();//will return the records from 5 to 10th number  
-//		System.out.println("5 to 10: "+list2);
-//		
-//		HQL update query Using Named Parameters
-		Query q=session.createQuery("update Employee set name=:n where id=:i");  
-		q.setParameter("n","Udit kumar");  
-		q.setParameter("i",1);  
-		System.out.println("status: "+q.executeUpdate());  
+		System.out.println(">>>>>>>>>>>>>>>>>>");
+		Session session1 = HibernateUtil.getSessionFactory().openSession();
+		System.out.println(">>1>>>>>>>>>>>>>>>");
 
-//		HQL delete query
-		Query query=session.createQuery("delete from Employee where id= 20");  
-		query.executeUpdate();  
-		
-		Query query1=session.createQuery("from Employee");
-		List list=query1.list();  
-		System.out.println(list);
-		
-		
-//		session.save(e);
-//		session.save(v);
-//		System.out.println(e);
-//		System.out.println(v);
-		
-		
-		tx.commit();
-		session.close();
-		sf.close();
-		
-//		System.out.println("main_method");
+		save(session1);
+//		Employee em =  session1.get(Employee.class, 1);
+//		System.out.println(em);
+//		System.out.println(em.address);
+//		Address add = (Address) session1.get(Address.class, 2);
+//		System.out.println(add);
+//		System.out.println(add.employee);
+
+//		fetchAllEmployees(session1);
+//		fetchAllAddress(session1);
+
+		System.out.println("..............Close Session .............");
+		session1.close();
+//		session2.close();
+		System.out.println("<<<<<<<<<<<");
+	}
+
+	@SuppressWarnings("deprecation")
+	private static void fetchAllEmployees(Session session) {
+		System.out.println("...............Employees Fetching...........");
+		List<Employee> resultList = session.createQuery("From Employee", Employee.class).getResultList();
+		for (Employee employee : resultList) {
+			System.out.println(employee);
 		}
+//		System.out.println(resultList.get(1).getAddress());
+		System.out.println("...............Employees end...........");
+	}
 
+//	@SuppressWarnings("deprecation")
+//	private static void fetchAllAddress(Session session) {
+//		System.out.println("...............Address Fetching..........");
+//		List<Address> resultList = session.createQuery("From Address", Address.class).getResultList();
+//		for (Address add : resultList) {
+//			System.out.print(add+"     "+add.getEmployee());
+//		}
+////		System.out.println(resultList.get(1).employee);
+//		System.out.println("...............Address end...........");
+//	}
+
+	private static void save(Session session) {
+		Transaction transaction = session.getTransaction();
+		transaction.begin();
+		Employee e = new Employee();
+		e.setFirstName("abhi");
+		e.setLastName("dev");
+		Address address = new Address("JN", "BST");
+//		address.employee = e;
+		e.setAddress(address);
+//		address.setEmployee(e);
+		session.persist(address);
+		session.persist(e);
+//		Employee e1 = new Employee();
+//		e1.setFirstName("Mihir");
+//		e1.setLastName("binoli");
+//		Address address1 = new Address("lucknow", "Kanpur");
+//		address1.employee = e1;
+//		e1.setAddress(address1);;
+
+//		session.persist(address1);
+//		session.persist(e1);
+		transaction.commit();
+	}
 }
+

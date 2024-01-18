@@ -1,43 +1,65 @@
 package hibernate.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
-@Entity(name = "ducat_emp")
-@Getter
-@Setter
-@ToString
+@Entity
+@Table(name="HCL_emp")
 public class Employee {
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-	private String name;
-	private String gender;
-	private int salary;
+	
+	@Column(name="first_Name")
+	private String firstName;
+	
+	private String lastName;
+	
+	@OneToOne
+	//(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "addFK")
+	private Address address;
+	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Employee() {}
+	
 	public int getId() {
 		return id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public int getSalary() {
-		return salary;
-	}
-	public void setSalary(int salary) {
-		this.salary = salary;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ",  ]";
+	}
+
+	
 }
 	
