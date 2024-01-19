@@ -16,7 +16,8 @@ import jakarta.persistence.OneToOne;
 		public String street;
 		public String city;
 		
-		@OneToOne( mappedBy = "address")
+		@OneToOne
+//		@OneToOne( mappedBy = "address")
 		public Employee employee;
 		
 		public Employee getEmployee() {

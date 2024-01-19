@@ -23,9 +23,8 @@ public class Employee {
 	
 	private String lastName;
 	
-	@OneToOne
-	//(cascade = CascadeType.ALL)
-	@JoinColumn(name = "addFK")
+	@OneToOne //(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "addFK")
 	private Address address;
 	
 	public Address getAddress() {

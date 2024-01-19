@@ -61,7 +61,7 @@ public class App {
 		Address address = new Address("JN", "BST");
 //		address.employee = e;
 		e.setAddress(address);
-//		address.setEmployee(e);
+		address.setEmployee(e);
 		session.persist(address);
 		session.persist(e);
 //		Employee e1 = new Employee();
