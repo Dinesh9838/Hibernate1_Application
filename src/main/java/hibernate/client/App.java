@@ -22,7 +22,7 @@ public class App {
 //		System.out.println(add.employee);
 
 //		fetchAllEmployees(session1);
-//		fetchAllAddress(session1);
+		fetchAllAddress(session1);
 
 		System.out.println("..............Close Session .............");
 		session1.close();
@@ -41,24 +41,24 @@ public class App {
 		System.out.println("...............Employees end...........");
 	}
 
-//	@SuppressWarnings("deprecation")
-//	private static void fetchAllAddress(Session session) {
-//		System.out.println("...............Address Fetching..........");
-//		List<Address> resultList = session.createQuery("From Address", Address.class).getResultList();
-//		for (Address add : resultList) {
-//			System.out.print(add+"     "+add.getEmployee());
-//		}
-////		System.out.println(resultList.get(1).employee);
-//		System.out.println("...............Address end...........");
-//	}
+	@SuppressWarnings("deprecation")
+	private static void fetchAllAddress(Session session) {
+		System.out.println("...............Address Fetching..........");
+		List<Address> resultList = session.createQuery("From Address", Address.class).getResultList();
+		for (Address add : resultList) {
+			System.out.print(add+"     "+add.getEmployee());
+		}
+//		System.out.println(resultList.get(1).employee);
+		System.out.println("...............Address end...........");
+	}
 
 	private static void save(Session session) {
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		Employee e = new Employee();
-		e.setFirstName("abhi");
+		e.setFirstName("ram");
 		e.setLastName("dev");
-		Address address = new Address("JN", "BST");
+		Address address = new Address("MP", "ST");
 //		address.employee = e;
 		e.setAddress(address);
 		address.setEmployee(e);
