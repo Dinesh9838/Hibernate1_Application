@@ -6,7 +6,7 @@
 	<hibernate-configuration>
 	      <session-factory>
 	      <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-	      <property name="connection.url">jdbc:mysql://localhost:3306/aarvo</property>
+	      <property name="connection.url">jdbc:mysql://localhost:3306/sys</property>
 	      <property name="hibernate.connection.driverclass">com.mysql.cj.jdbc.Driver</property>
 	      <property name="connection.username">root</property>
 	      <property name="connection.password">root</property>
