@@ -7,11 +7,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 
-//@Entity(name = "employee2")
+@Entity(name = "employee2")
 public final class Employee {
 	public Employee() {
 		super();
@@ -25,9 +26,8 @@ public final class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@OneToMany(cascade = CascadeType.ALL)
-//	mappedBy = "employee",
+ 
+	@ManyToMany//(mappedBy = "employee")
 	List<Address> address;
 
 	public Employee(String name, String gender, int id, List<Address> address) {
@@ -74,6 +74,7 @@ public final class Employee {
 	public String toString() {
 		return "Employee [name=" + name + ", gender=" + gender + ", id=" + id + "]";
 	}
+
 
 }
 	

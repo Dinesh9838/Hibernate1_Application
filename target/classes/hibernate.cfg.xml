@@ -14,8 +14,7 @@
 	       <property name="format_sql">true</property>
 	      <property name="hbm2ddl.auto">create</property>
 	      
-	      
-	      <mapping class="hibernate.entity.Employee"/>
+	     <mapping class="hibernate.entity.Employee"/>
 		<mapping class="hibernate.entity.Address"/>
 	      </session-factory>
 	</hibernate-configuration>
